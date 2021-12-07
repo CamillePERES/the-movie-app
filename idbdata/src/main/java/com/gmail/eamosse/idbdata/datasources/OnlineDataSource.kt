@@ -1,9 +1,10 @@
 package com.gmail.eamosse.idbdata.datasources
 
+import com.gmail.eamosse.idbdata.api.response.*
 import com.gmail.eamosse.idbdata.api.response.TokenResponse
-import com.gmail.eamosse.idbdata.api.response.toToken
 import com.gmail.eamosse.idbdata.api.service.MovieService
-import com.gmail.eamosse.idbdata.data.Token
+import com.gmail.eamosse.idbdata.api.service.parse
+import com.gmail.eamosse.idbdata.api.service.safeCall
 import com.gmail.eamosse.idbdata.utils.Result
 
 /**
@@ -20,18 +21,27 @@ internal class OnlineDataSource(private val service: MovieService) {
      * Sinon, une erreur est survenue
      */
     suspend fun getToken(): Result<TokenResponse> {
-        return try {
+        return safeCall {
             val response = service.getToken()
-            if (response.isSuccessful) {
-                Result.Succes(response.body()!!)
-            } else {
+            response.parse()
+        }
+    }
+
+    suspend fun getCategories(): Result<List<CategoryResponse.Genre>>{
+        return try{
+            val response = service.getCategories()
+            if (response.isSuccessful){
+                Result.Succes(response.body()!!.genres)
+            }
+            else{
                 Result.Error(
                     exception = Exception(),
                     message = response.message(),
                     code = response.code()
                 )
             }
-        } catch (e: Exception) {
+        }
+        catch(e:Exception){
             Result.Error(
                 exception = e,
                 message = e.message ?: "No message",
@@ -39,5 +49,27 @@ internal class OnlineDataSource(private val service: MovieService) {
             )
         }
     }
+
+    suspend fun getCategoriesMovies(genreId: Int, page: Int): Result<CategoriesMoviesResponse> {
+        return safeCall {
+            val response = service.getMoviesByCategory(genreId.toString(), page)
+            response.parse()
+        }
+    }
+
+    suspend fun getDetailsMovie(movieId: Int): Result<MovieResponse>{
+        return safeCall{
+            val response = service.getDetailsMovie(movieId)
+            response.parse()
+        }
+    }
+
+    suspend fun getCreditsOfMovie(movieId: Int): Result<CreditResponse>{
+        return safeCall {
+            val response = service.getCreditsOfMovie(movieId)
+            response.parse()
+        }
+    }
+
 }
 

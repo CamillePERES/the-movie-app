@@ -2,6 +2,9 @@ package com.gmail.eamosse.imdb
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
+import android.view.View
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -39,14 +42,27 @@ class MainActivity : AppCompatActivity() {
         //Navigation controlleur, utilisée pour géter la navigation (ex. affichage de fragment)
         val navController = findNavController(R.id.nav_host_fragment)
         //Charger les éléments principaux de la bottom bar
-        val appBarConfiguration = AppBarConfiguration(
-                setOf(
-                        R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-                )
+        val setMenu =  setOf(
+            R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
         )
+        val appBarConfiguration = AppBarConfiguration(setMenu)
+
+        navController.addOnDestinationChangedListener {_, destination, _ ->
+            navView.visibility = if(setMenu.contains(destination.id)) View.VISIBLE else View.GONE;
+        }
         //Indiquer les éléments principaux de la bottom bar
         setupActionBarWithNavController(navController, appBarConfiguration)
         //Finalement, on lie la bottom bar et la nav controller
         navView.setupWithNavController(navController)
+    }
+
+    override fun onOptionsItemSelected(@NonNull item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                findNavController(R.id.nav_host_fragment).popBackStack()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

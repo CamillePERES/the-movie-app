@@ -12,9 +12,36 @@
         tools:layout="@layout/fragment_home">
 
         <action
-            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
-            app:destination="@id/navigation_home_second" />
+            android:id="@+id/action_HomeFragment_to_MovieFragment"
+            app:destination="@id/navigation_movies" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_movies"
+        android:name="com.gmail.eamosse.imdb.ui.movie.MovieFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/list_movies_fragment">
+
+        <action
+            android:id="@+id/action_MovieFragment_to_MovieDetailsFragment"
+            app:destination="@id/navigation_movies_details" />
+
+        <argument
+            android:name="Category"
+            app:argType="com.gmail.eamosse.imdb.parcelable.CategoryParcelable" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_movies_details"
+        android:name="com.gmail.eamosse.imdb.ui.moviedetails.MovieDetailsFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_details_movies">
+        <argument
+            android:name="Details"
+            app:argType="com.gmail.eamosse.imdb.parcelable.MovieParcelable" />
+    </fragment>
+
+
     <fragment
         android:id="@+id/navigation_home_second"
         android:name="com.gmail.eamosse.imdb.ui.home.HomeSecondFragment"

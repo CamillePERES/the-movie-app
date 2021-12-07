@@ -7,4 +7,6 @@ package com.gmail.eamosse.idbdata.data
 class Token(
     val expiresAt: String,
     val requestToken: String
-)
+){
+
+}

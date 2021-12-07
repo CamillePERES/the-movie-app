@@ -1,18 +1,19 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
     buildToolsVersion "29.0.3"
+
+    dataBinding {
+        enabled = true
+    }
 
     defaultConfig {
 
-        minSdkVersion 24
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion 29
+        targetSdkVersion 31
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -39,13 +40,13 @@ dependencies {
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
 
-    implementation "org.koin:koin-core:$koin_version"
-    testImplementation "org.koin:koin-test:$koin_version"
-    implementation "org.koin:koin-androidx-scope:$koin_version"
-    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "io.insert-koin:koin-core:$koin_version"
+    testImplementation "io.insert-koin:koin-test:$koin_version"
+    implementation "io.insert-koin:koin-androidx-scope:$koin_version"
+    implementation "io.insert-koin:koin-androidx-viewmodel:$koin_version"
 
     implementation 'com.google.code.gson:gson:2.8.6'
 
