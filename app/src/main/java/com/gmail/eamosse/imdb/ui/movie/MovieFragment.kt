@@ -9,11 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.gmail.eamosse.idbdata.api.response.DiscoverMovie
-import com.gmail.eamosse.idbdata.data.Category
 import com.gmail.eamosse.imdb.databinding.ListMoviesFragmentBinding
-import com.gmail.eamosse.imdb.parcelable.CategoryParcelable
 import com.gmail.eamosse.imdb.parcelable.MovieParcelable
-import com.gmail.eamosse.imdb.ui.home.HomeFragmentDirections
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieFragment() : Fragment(), IMovieListener{

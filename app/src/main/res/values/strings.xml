@@ -11,4 +11,6 @@
     <string name="movie_details">Movie details</string>
 
     <string name="home_second">Home Second</string>
+    <string name="videos">Trailers</string>
+    <string name="cast">Cast</string>
 </resources>

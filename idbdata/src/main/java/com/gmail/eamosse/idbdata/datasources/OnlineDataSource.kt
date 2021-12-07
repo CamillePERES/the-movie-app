@@ -71,5 +71,12 @@ internal class OnlineDataSource(private val service: MovieService) {
         }
     }
 
+    suspend fun getVideosOfMovie(movieId: Int): Result<MoviesVideosResponse>{
+        return safeCall {
+            val response = service.getVideosOfMovie(movieId)
+            response.parse()
+        }
+    }
+
 }
 

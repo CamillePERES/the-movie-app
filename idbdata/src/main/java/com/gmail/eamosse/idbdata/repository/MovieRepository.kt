@@ -77,4 +77,13 @@ class MovieRepository : KoinComponent {
             is Result.Error -> result
         }
     }
+
+    suspend fun getVideosOfMovies(movieId : Int): Result<MoviesVideosResponse>{
+        return when(val result = online.getVideosOfMovie(movieId)){
+            is Result.Succes -> {
+                Result.Succes(result.data)
+            }
+            is Result.Error -> result
+        }
+    }
 }

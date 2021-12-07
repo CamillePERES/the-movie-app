@@ -29,6 +29,7 @@ class MovieDetailsFragment(): Fragment() {
         binding.viewmodel = viewModel
         viewModel.movieSelected = args.details
         binding.castList.adapter = CastAdapter(listOf())
+        binding.videosList.adapter = VideosAdapter(listOf())
         return binding.root
     }
 
@@ -50,8 +51,13 @@ class MovieDetailsFragment(): Fragment() {
             binding.castList.adapter = CastAdapter(it)
         }
 
+        viewModel.videos.observe(viewLifecycleOwner) {
+            binding.videosList.adapter = VideosAdapter(it)
+        }
+
         viewModel.getMovie()
         viewModel.getCredits()
+        viewModel.getVideos()
     }
 
 }

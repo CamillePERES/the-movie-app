@@ -32,6 +32,13 @@ fun ImageView.bindCastPoster(path:String, context: Context){
         .error(R.drawable.ic_baseline_person_24)
         .skipMemoryCache(false)
         .into(this)
+}
 
-
+fun ImageView.bindVideoPoster(key: String, context: Context){
+    Glide.with(context)
+        .load("https://img.youtube.com/vi/"+key+"/hqdefault.jpg")
+        .placeholder(R.drawable.ic_baseline_play_circle_outline_24)
+        .error(R.drawable.ic_baseline_play_circle_outline_24)
+        .skipMemoryCache(false)
+        .into(this)
 }

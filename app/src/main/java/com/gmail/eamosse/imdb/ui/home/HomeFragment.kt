@@ -10,7 +10,6 @@ import androidx.navigation.Navigation
 import com.gmail.eamosse.idbdata.data.Category
 import com.gmail.eamosse.imdb.databinding.FragmentHomeBinding
 import com.gmail.eamosse.imdb.parcelable.CategoryParcelable
-import com.gmail.eamosse.imdb.ui.movie.MovieFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment() : Fragment(), ICategoryListener {

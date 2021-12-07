@@ -22,4 +22,8 @@ internal interface MovieService {
 
     @GET("movie/{movie_id}/credits")
     suspend fun getCreditsOfMovie(@Path("movie_id") id:Int): Response<CreditResponse>
+
+    @GET("movie/{movie_id}/videos")
+    suspend fun getVideosOfMovie(@Path("movie_id")id: Int): Response<MoviesVideosResponse>
+
 }

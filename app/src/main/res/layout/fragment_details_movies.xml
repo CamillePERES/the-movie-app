@@ -230,15 +230,16 @@
                         tools:text="Trapped on the beach with their backs to the sea, British and Allied troops are surrounded by enemy forces." />
 
                     <TextView
-                        android:id="@+id/watchTrailerText"
+                        android:id="@+id/movieText"
                         style="@style/NunitoSemiBoldStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:textSize="18sp"/>
+                        android:text="@string/videos"
+                        android:textSize="18sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/videosRecyclerView"
+                        android:id="@+id/videos_list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -246,18 +247,17 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:listitem="@layout/video_item" />
 
                     <TextView
                         android:id="@+id/castText"
-                        style="@style/TitleStyle"
+                        style="@style/NunitoSemiBoldStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="36sp"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/subInfoLayout"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="Cast" />
+                        android:layout_marginTop="10dp"
+                        android:text="@string/cast"
+                        android:textSize="18sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/cast_list"
