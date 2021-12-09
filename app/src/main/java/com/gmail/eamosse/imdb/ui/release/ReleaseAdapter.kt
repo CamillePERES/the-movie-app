@@ -1,4 +1,4 @@
-package com.gmail.eamosse.imdb.ui.movie
+package com.gmail.eamosse.imdb.ui.release
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gmail.eamosse.idbdata.api.response.DiscoverMovie
 import com.gmail.eamosse.imdb.databinding.MovieItemBinding
 import com.gmail.eamosse.imdb.ui.extension.bindPosterMovie
-import com.gmail.eamosse.imdb.ui.extension.bindPosterMovieCircle
+import com.gmail.eamosse.imdb.ui.movie.IMovieListener
+import com.gmail.eamosse.imdb.ui.movie.MovieAdapter
+import com.gmail.eamosse.imdb.ui.moviedetails.CastAdapter
 
-class MovieAdapter(private val items:List<DiscoverMovie>, private val listener:IMovieListener) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class ReleaseAdapter(private val items:List<DiscoverMovie>, private val listener: IMovieListener): RecyclerView.Adapter<ReleaseAdapter.ViewHolder>() {
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReleaseAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return ViewHolder(MovieItemBinding.inflate(inflater, parent, false))
     }
@@ -38,4 +39,5 @@ class MovieAdapter(private val items:List<DiscoverMovie>, private val listener:I
             binding.item = item
         }
     }
+
 }

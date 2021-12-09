@@ -7,6 +7,11 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+enum class SortByType(val type: String) {
+    RELEASE_DATE_DESC("release_date.desc"),
+    RELEASE_DATE_ASC("release_date.asc")
+}
+
 internal interface MovieService {
     @GET("authentication/token/new")
     suspend fun getToken(): Response<TokenResponse>
@@ -25,5 +30,8 @@ internal interface MovieService {
 
     @GET("movie/{movie_id}/videos")
     suspend fun getVideosOfMovie(@Path("movie_id")id: Int): Response<MoviesVideosResponse>
+
+    @GET("discover/movie")
+    suspend fun getSortBy(@Query("sort_by") sort: String): Response<CategoriesMoviesResponse>
 
 }

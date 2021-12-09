@@ -56,15 +56,22 @@
             app:argType="string" />
     </fragment>
 
+
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.gmail.eamosse.imdb.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_release"
+        android:name="com.gmail.eamosse.imdb.ui.release.ReleaseFragment"
+        android:label="@string/title_release"
+        tools:layout="@layout/fragment_release">
+    <action
+        android:id="@+id/action_ReleaseFragment_to_MovieDetailsFragment"
+        app:destination="@id/navigation_movies_details" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.gmail.eamosse.imdb.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
 </navigation>

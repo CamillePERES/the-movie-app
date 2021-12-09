@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -10,9 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical">
@@ -20,28 +19,29 @@
 
         <ImageView
             android:id="@+id/item_list_poster"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="108dp"
+            android:layout_height="162dp"
+            android:clickable="false"
+            tools:src="@tools:sample/avatars[0]"
             android:src="@drawable/ic_baseline_local_movies_24"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/item_list_name"
-            android:layout_width="wrap_content"
+            style="@style/NunitoSemiBoldStyle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:maxWidth="250dp"
-            android:maxLines="1"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/item_list_poster"
-            app:layout_constraintStart_toEndOf="@+id/item_list_poster"
-            app:layout_constraintTop_toTopOf="@+id/item_list_poster"
-            tools:text="Movie" />
+            android:alpha=".8"
+            android:ellipsize="end"
+            android:lines="2"
+            android:paddingTop="5dp"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@id/item_list_poster"
+            app:layout_constraintRight_toRightOf="@id/item_list_poster"
+            tools:text="Movie"
+            tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

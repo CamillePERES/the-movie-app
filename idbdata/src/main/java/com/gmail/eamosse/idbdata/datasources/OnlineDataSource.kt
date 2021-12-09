@@ -3,6 +3,7 @@ package com.gmail.eamosse.idbdata.datasources
 import com.gmail.eamosse.idbdata.api.response.*
 import com.gmail.eamosse.idbdata.api.response.TokenResponse
 import com.gmail.eamosse.idbdata.api.service.MovieService
+import com.gmail.eamosse.idbdata.api.service.SortByType
 import com.gmail.eamosse.idbdata.api.service.parse
 import com.gmail.eamosse.idbdata.api.service.safeCall
 import com.gmail.eamosse.idbdata.utils.Result
@@ -74,6 +75,13 @@ internal class OnlineDataSource(private val service: MovieService) {
     suspend fun getVideosOfMovie(movieId: Int): Result<MoviesVideosResponse>{
         return safeCall {
             val response = service.getVideosOfMovie(movieId)
+            response.parse()
+        }
+    }
+
+    suspend fun getSortBy(sort: SortByType): Result<CategoriesMoviesResponse>{
+        return safeCall {
+            val response = service.getSortBy(sort.type)
             response.parse()
         }
     }

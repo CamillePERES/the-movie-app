@@ -12,7 +12,7 @@ import com.gmail.eamosse.imdb.R
 
 class DashboardFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    /*private lateinit var dashboardViewModel: DashboardViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -27,5 +27,5 @@ class DashboardFragment : Fragment() {
             textView.text = it
         })
         return root
-    }
+    }*/
 }
