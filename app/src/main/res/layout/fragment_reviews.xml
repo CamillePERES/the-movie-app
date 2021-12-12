@@ -6,10 +6,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.movie.MovieFragment">
+        tools:context=".ui.movie.ReviewFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/movies_list"
+            android:id="@+id/reviews_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -17,9 +17,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:spanCount="4"
-            tools:listitem="@layout/movie_item" />
+            tools:listitem="@layout/reviews_item" />
 
         <ProgressBar
             android:id="@+id/moviesProgressBar"
@@ -27,11 +27,11 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/movies_list"
-            app:layout_constraintEnd_toEndOf="@id/movies_list"
+            app:layout_constraintBottom_toBottomOf="@id/reviews_list"
+            app:layout_constraintEnd_toEndOf="@id/reviews_list"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@id/movies_list"
-            app:layout_constraintTop_toTopOf="@id/movies_list"
+            app:layout_constraintStart_toStartOf="@id/reviews_list"
+            app:layout_constraintTop_toTopOf="@id/reviews_list"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

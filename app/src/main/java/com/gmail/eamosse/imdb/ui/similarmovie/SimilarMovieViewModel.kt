@@ -1,47 +1,44 @@
-package com.gmail.eamosse.imdb.ui.movie
+package com.gmail.eamosse.imdb.ui.similarmovie
 
 import androidx.lifecycle.*
 import com.gmail.eamosse.idbdata.api.response.DiscoverMovie
-import com.gmail.eamosse.idbdata.data.Category
 import com.gmail.eamosse.idbdata.repository.MovieRepository
 import com.gmail.eamosse.idbdata.utils.Result
-import com.gmail.eamosse.imdb.parcelable.CategoryParcelable
+import com.gmail.eamosse.imdb.parcelable.MovieParcelable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MovieViewModel(private val repository: MovieRepository) : ViewModel(){
+class SimilarMovieViewModel(private val repository: MovieRepository): ViewModel() {
 
-    var categorySelected: CategoryParcelable? = null
-    val movies = MediatorLiveData<MutableList<DiscoverMovie>>()
-
+    var movieSelected: MovieParcelable? = null
     var page: Int = 1
+    val similar = MediatorLiveData<MutableList<DiscoverMovie>>()
 
-    private val _movies: MutableLiveData<List<DiscoverMovie>> = MutableLiveData()
-   /* val movies: LiveData<List<DiscoverMovie>>
-        get() = _movies*/
+    private val _similar: MutableLiveData<List<DiscoverMovie>> = MutableLiveData()
+    /*val similar: LiveData<List<DiscoverMovie>>
+        get() = _similar*/
 
     private val _error: MutableLiveData<String> = MutableLiveData()
     val error: LiveData<String>
         get() = _error
 
     init{
-        movies.addSource(_movies){
-            movies.appendList(it)
+        similar.addSource(_similar){
+            similar.appendList(it)
         }
     }
-
     fun <T, X : List<T>> MutableLiveData<MutableList<T>>.appendList(list: X) {
         val newList = this.value ?: mutableListOf()
         newList.addAll(list)
         this.value = newList
     }
 
-    fun getMovieOfCategory(){
-        categorySelected?.let {
+    fun getSimilar(){
+        movieSelected?.let{
             viewModelScope.launch(Dispatchers.IO){
-                when (val result = repository.getMovieOfCategory(it.id, page)){
+                when (val result = repository.getSimilarMovies(it.id, page)){
                     is Result.Succes -> {
-                        _movies.postValue(result.data.results)
+                        _similar.postValue(result.data.results)
                     }
                     is Result.Error -> {
                         _error.postValue(result.message)
@@ -51,8 +48,9 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel(){
         }
     }
 
-    fun getMoreMoviesOfCategory() {
+    fun getMoreSimilar() {
         page++
-        getMovieOfCategory()
+        getSimilar()
     }
+
 }

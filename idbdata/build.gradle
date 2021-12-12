@@ -44,6 +44,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.0'
 
     implementation "io.insert-koin:koin-core:$koin_version"
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     testImplementation "io.insert-koin:koin-test:$koin_version"
     implementation "io.insert-koin:koin-androidx-scope:$koin_version"
     implementation "io.insert-koin:koin-androidx-viewmodel:$koin_version"

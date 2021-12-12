@@ -1,32 +1,29 @@
-package com.gmail.eamosse.imdb.ui.movie
+package com.gmail.eamosse.imdb.ui.reviews
 
 import androidx.lifecycle.*
 import com.gmail.eamosse.idbdata.api.response.DiscoverMovie
-import com.gmail.eamosse.idbdata.data.Category
+import com.gmail.eamosse.idbdata.api.response.ReviewsResponse
 import com.gmail.eamosse.idbdata.repository.MovieRepository
 import com.gmail.eamosse.idbdata.utils.Result
-import com.gmail.eamosse.imdb.parcelable.CategoryParcelable
+import com.gmail.eamosse.imdb.parcelable.MovieParcelable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MovieViewModel(private val repository: MovieRepository) : ViewModel(){
+class ReviewsViewModel(private val repository: MovieRepository): ViewModel() {
 
-    var categorySelected: CategoryParcelable? = null
-    val movies = MediatorLiveData<MutableList<DiscoverMovie>>()
+    var page: Int =1
+    var movieSelected: MovieParcelable? = null
+    val reviews = MediatorLiveData<MutableList<ReviewsResponse>>()
 
-    var page: Int = 1
-
-    private val _movies: MutableLiveData<List<DiscoverMovie>> = MutableLiveData()
-   /* val movies: LiveData<List<DiscoverMovie>>
-        get() = _movies*/
+    private val _reviews: MutableLiveData<List<ReviewsResponse>> = MutableLiveData()
 
     private val _error: MutableLiveData<String> = MutableLiveData()
     val error: LiveData<String>
         get() = _error
 
     init{
-        movies.addSource(_movies){
-            movies.appendList(it)
+        reviews.addSource(_reviews){
+            reviews.appendList(it)
         }
     }
 
@@ -36,12 +33,12 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel(){
         this.value = newList
     }
 
-    fun getMovieOfCategory(){
-        categorySelected?.let {
+    fun getReviews(){
+        movieSelected?.let{
             viewModelScope.launch(Dispatchers.IO){
-                when (val result = repository.getMovieOfCategory(it.id, page)){
+                when (val result = repository.getReviewsOfMovie(it.id, page)){
                     is Result.Succes -> {
-                        _movies.postValue(result.data.results)
+                        _reviews.postValue(result.data.results)
                     }
                     is Result.Error -> {
                         _error.postValue(result.message)
@@ -51,8 +48,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel(){
         }
     }
 
-    fun getMoreMoviesOfCategory() {
-        page++
-        getMovieOfCategory()
+    fun getMoreReviews() {
+        TODO("Not yet implemented")
     }
 }

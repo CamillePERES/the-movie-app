@@ -36,6 +36,15 @@
         android:name="com.gmail.eamosse.imdb.ui.moviedetails.MovieDetailsFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_details_movies">
+
+        <action
+            android:id="@+id/action_MovieDetailsFragment_to_SimilarMovieFragment"
+            app:destination="@id/navigation_similar" />
+
+        <action
+            android:id="@+id/action_MovieDetailsFragment_to_ReviewsFragment"
+            app:destination="@id/navigation_review" />
+
         <argument
             android:name="Details"
             app:argType="com.gmail.eamosse.imdb.parcelable.MovieParcelable" />
@@ -69,9 +78,29 @@
 
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.gmail.eamosse.imdb.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_about"
+        android:name="com.gmail.eamosse.imdb.ui.about.AboutFragment"
+        android:label="@string/about"
+        tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/navigation_similar"
+        android:name="com.gmail.eamosse.imdb.ui.similarmovie.SimilarMovieFragment"
+        android:label="@string/similar"
+        tools:layout="@layout/fragment_similar_movies">
+        <argument
+            android:name="Similar"
+            app:argType="com.gmail.eamosse.imdb.parcelable.MovieParcelable" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_review"
+        android:name="com.gmail.eamosse.imdb.ui.reviews.ReviewsFragment"
+        android:label="@string/review"
+        tools:layout="@layout/fragment_reviews">
+        <argument
+            android:name="Review"
+            app:argType="com.gmail.eamosse.imdb.parcelable.MovieParcelable" />
+    </fragment>
 
 </navigation>

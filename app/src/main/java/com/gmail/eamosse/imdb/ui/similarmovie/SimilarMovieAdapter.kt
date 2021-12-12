@@ -1,4 +1,4 @@
-package com.gmail.eamosse.imdb.ui.release
+package com.gmail.eamosse.imdb.ui.similarmovie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,29 +9,26 @@ import com.gmail.eamosse.idbdata.api.response.DiscoverMovie
 import com.gmail.eamosse.imdb.databinding.MovieItemBinding
 import com.gmail.eamosse.imdb.ui.ScrollListener
 import com.gmail.eamosse.imdb.ui.extension.bindPosterMovie
-import com.gmail.eamosse.imdb.ui.movie.IMovieListener
+import com.gmail.eamosse.imdb.ui.movie.MovieAdapter
 
-class ReleaseAdapter(
-    private val listener: IMovieListener,
+class SimilarMovieAdapter(
     private val infiniteContentScrollListener: ScrollListener
-): ListAdapter<(DiscoverMovie),ReleaseAdapter.ViewHolder>(DiffCallback()) {
+) : ListAdapter<(DiscoverMovie), SimilarMovieAdapter.ViewHolder>(DiffCallback())  {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReleaseAdapter.ViewHolder {
+    private val limit = 4
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimilarMovieAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return ViewHolder(MovieItemBinding.inflate(inflater, parent, false))
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int){
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val movie: DiscoverMovie = getItem(position)
         holder.bind(movie)
 
         val context = holder.itemView.context
         movie.posterPath?.let { holder.binding.itemListPoster.bindPosterMovie(it, context) }
-
-        holder.binding.root.setOnClickListener {
-            listener.onClick(movie)
-        }
     }
 
     override fun submitList(list: List<DiscoverMovie>?) {
@@ -46,6 +43,14 @@ class ReleaseAdapter(
             binding.item = item
         }
     }
+
+    /*override fun getItemCount(): Int {
+        return if(items.size > limit){
+            limit;
+        } else {
+            items.size;
+        }
+    }*/
 
     private class DiffCallback : DiffUtil.ItemCallback<DiscoverMovie>() {
         override fun areItemsTheSame(oldItem: DiscoverMovie, newItem: DiscoverMovie): Boolean {

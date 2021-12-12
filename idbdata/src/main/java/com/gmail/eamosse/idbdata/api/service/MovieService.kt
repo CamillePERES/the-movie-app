@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 enum class SortByType(val type: String) {
     RELEASE_DATE_DESC("release_date.desc"),
-    RELEASE_DATE_ASC("release_date.asc")
+    POPULARITY_DESC("popularity.desc")
 }
 
 internal interface MovieService {
@@ -20,7 +20,7 @@ internal interface MovieService {
     suspend fun getCategories(): Response<CategoryResponse>
 
     @GET("discover/movie")
-    suspend fun getMoviesByCategory(@Query("with_genres") genre: String, @Query("page") page: Int): Response<CategoriesMoviesResponse>
+    suspend fun getMoviesByCategory(@Query("with_genres") genre: String, @Query("page")page: Int): Response<CategoriesMoviesResponse>
 
     @GET("movie/{movie_id}")
     suspend fun getDetailsMovie(@Path("movie_id") id:Int): Response<MovieResponse>
@@ -31,7 +31,13 @@ internal interface MovieService {
     @GET("movie/{movie_id}/videos")
     suspend fun getVideosOfMovie(@Path("movie_id")id: Int): Response<MoviesVideosResponse>
 
+    @GET("movie/{movie_id}/similar")
+    suspend fun getSimilarMovies(@Path("movie_id")id: Int ,@Query("page") page: Int): Response<CategoriesMoviesResponse>
+
+    @GET("movie/{movie_id}/reviews")
+    suspend fun getReviewsOfMovie(@Path("movie_id")id: Int, @Query("page")page:Int): Response<ReviewsMovieResponse>
+
     @GET("discover/movie")
-    suspend fun getSortBy(@Query("sort_by") sort: String): Response<CategoriesMoviesResponse>
+    suspend fun getSortBy(@Query("sort_by") sort: String, @Query("page") page: Int): Response<CategoriesMoviesResponse>
 
 }

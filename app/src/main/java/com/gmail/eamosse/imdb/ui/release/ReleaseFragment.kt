@@ -11,13 +11,16 @@ import androidx.navigation.fragment.navArgs
 import com.gmail.eamosse.idbdata.api.response.DiscoverMovie
 import com.gmail.eamosse.imdb.databinding.FragmentReleaseBinding
 import com.gmail.eamosse.imdb.parcelable.MovieParcelable
+import com.gmail.eamosse.imdb.ui.ScrollListener
 import com.gmail.eamosse.imdb.ui.movie.IMovieListener
+import com.gmail.eamosse.imdb.ui.movie.MovieAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ReleaseFragment(): Fragment(), IMovieListener {
 
     private val viewModel: ReleaseViewModel by viewModel()
     private lateinit var binding: FragmentReleaseBinding
+    private lateinit var adapter: ReleaseAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +29,11 @@ class ReleaseFragment(): Fragment(), IMovieListener {
     ): View {
         binding = FragmentReleaseBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.releaseList.adapter = ReleaseAdapter(listOf(), this)
+        adapter = ReleaseAdapter(this, ScrollListener(binding.releaseList){
+            viewModel.getMoreByReleaseDatesDesc()
+            viewModel.getMoreByPopularityDesc()
+        })
+        binding.releaseList.adapter = adapter
         return binding.root
     }
 
@@ -34,9 +41,10 @@ class ReleaseFragment(): Fragment(), IMovieListener {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.release.observe(viewLifecycleOwner, Observer {
-            binding.releaseList.adapter = ReleaseAdapter(it, this)
+            adapter.submitList(it)
         })
 
+        viewModel.getByPopularityDesc()
         viewModel.getByReleaseDatesDesc()
     }
 

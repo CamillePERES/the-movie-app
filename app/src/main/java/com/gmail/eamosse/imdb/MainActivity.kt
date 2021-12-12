@@ -10,6 +10,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.gmail.eamosse.idbdata.repository.MovieRepository
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.GlobalScope
@@ -23,6 +25,8 @@ import org.koin.android.ext.android.inject
 class MainActivity : AppCompatActivity() {
 
     val repository: MovieRepository by inject()
+    lateinit var recyclerView: RecyclerView
+    var isLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         //Charger les éléments principaux de la bottom bar
         val setMenu =  setOf(
-            R.id.navigation_home, R.id.navigation_release, R.id.navigation_notifications
+            R.id.navigation_home, R.id.navigation_release, R.id.navigation_about
         )
         val appBarConfiguration = AppBarConfiguration(setMenu)
 
@@ -65,4 +69,6 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+
 }

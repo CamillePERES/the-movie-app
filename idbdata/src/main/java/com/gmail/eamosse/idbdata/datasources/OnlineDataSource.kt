@@ -79,9 +79,23 @@ internal class OnlineDataSource(private val service: MovieService) {
         }
     }
 
-    suspend fun getSortBy(sort: SortByType): Result<CategoriesMoviesResponse>{
+    suspend fun getSimilarMovies(movieId: Int, page: Int): Result<CategoriesMoviesResponse>{
+        return safeCall{
+            val response = service.getSimilarMovies(movieId, page)
+            response.parse()
+        }
+    }
+
+    suspend fun getSortBy(sort: SortByType, page:Int): Result<CategoriesMoviesResponse>{
         return safeCall {
-            val response = service.getSortBy(sort.type)
+            val response = service.getSortBy(sort.type, page)
+            response.parse()
+        }
+    }
+
+    suspend fun getReviewsOfMovie(movieId: Int, page: Int): Result<ReviewsMovieResponse>{
+        return safeCall {
+            val response = service.getReviewsOfMovie(movieId, page)
             response.parse()
         }
     }

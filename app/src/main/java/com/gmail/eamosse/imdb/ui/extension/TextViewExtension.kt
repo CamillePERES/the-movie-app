@@ -1,5 +1,6 @@
 package com.gmail.eamosse.imdb.ui.extension
 
+import android.icu.text.SimpleDateFormat
 import android.widget.TextView
 import com.gmail.eamosse.idbdata.api.response.CategoryResponse
 import org.w3c.dom.Text
@@ -33,4 +34,12 @@ fun TextView.bindTimeMovie(time: Int){
     val minutes = time%60
     val hours: Int = time/60
     this.text="$hours h $minutes"
+}
+
+fun TextView.bindDateFormat(date: String){
+    if (date.isNullOrBlank()) return
+    val date = SimpleDateFormat("yyyy-MM-dd").parse(date)
+    val pat = SimpleDateFormat().toLocalizedPattern().replace("\\W?[HhKkmsSzZXa]+\\W?".toRegex(), "")
+    val localFormatter = SimpleDateFormat(pat, Locale.getDefault())
+    this.text = localFormatter.format(date)
 }

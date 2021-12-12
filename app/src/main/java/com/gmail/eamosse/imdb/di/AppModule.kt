@@ -5,6 +5,8 @@ import com.gmail.eamosse.imdb.ui.home.HomeViewModel
 import com.gmail.eamosse.imdb.ui.movie.MovieViewModel
 import com.gmail.eamosse.imdb.ui.moviedetails.MovieDetailsViewModel
 import com.gmail.eamosse.imdb.ui.release.ReleaseViewModel
+import com.gmail.eamosse.imdb.ui.reviews.ReviewsViewModel
+import com.gmail.eamosse.imdb.ui.similarmovie.SimilarMovieViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -39,5 +41,13 @@ val appModule = module {
 
     viewModel{
         ReleaseViewModel(repository = get())
+    }
+
+    viewModel{
+        SimilarMovieViewModel(repository = get())
+    }
+
+    viewModel {
+        ReviewsViewModel(repository = get())
     }
 }

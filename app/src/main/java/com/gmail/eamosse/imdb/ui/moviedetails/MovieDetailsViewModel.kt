@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gmail.eamosse.idbdata.api.response.CastResponse
+import com.gmail.eamosse.idbdata.api.response.DiscoverMovie
 import com.gmail.eamosse.idbdata.api.response.MovieResponse
 import com.gmail.eamosse.idbdata.api.response.VideosResponse
 import com.gmail.eamosse.idbdata.repository.MovieRepository
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 class MovieDetailsViewModel(private val repository: MovieRepository): ViewModel() {
 
     var movieSelected: MovieParcelable? = null
+    var page: Int = 1
 
     private val _moviesDetails: MutableLiveData<MovieResponse> = MutableLiveData()
     val details: LiveData<MovieResponse>
@@ -32,6 +34,10 @@ class MovieDetailsViewModel(private val repository: MovieRepository): ViewModel(
     private val _videos: MutableLiveData<List<VideosResponse>> = MutableLiveData()
     val videos: LiveData<List<VideosResponse>>
         get() = _videos
+
+    private val _similarMovies: MutableLiveData<List<DiscoverMovie>> = MutableLiveData()
+    val similarMovies: LiveData<List<DiscoverMovie>>
+        get() = _similarMovies
 
     fun getMovie(){
         movieSelected?.let {
@@ -71,6 +77,21 @@ class MovieDetailsViewModel(private val repository: MovieRepository): ViewModel(
                 when (val result = repository.getVideosOfMovies(it.id)){
                     is Result.Succes -> {
                         _videos.postValue(result.data.results)
+                    }
+                    is Result.Error -> {
+                        _error.postValue(result.message)
+                    }
+                }
+            }
+        }
+    }
+
+    fun getSimilarMovies(){
+        movieSelected?.let{
+            viewModelScope.launch(Dispatchers.IO){
+                when (val result = repository.getSimilarMovies(it.id, page)){
+                    is Result.Succes -> {
+                        _similarMovies.postValue(result.data.results)
                     }
                     is Result.Error -> {
                         _error.postValue(result.message)

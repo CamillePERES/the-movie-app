@@ -10,8 +10,13 @@
     <string name="title_release">Latest Release</string>
     <string name="title_notifications">Notifications</string>
     <string name="movie_details">Movie details</string>
+    <string name="similar_movie">Similar movies</string>
+    <string name="about">Profile</string>
+    <string name="review">Reviews</string>
 
     <string name="home_second">Home Second</string>
     <string name="videos">Trailers</string>
     <string name="cast">Cast</string>
+    <string name="similar">Fans also like</string>
+    <string name="see_more">See more</string>
 </resources>

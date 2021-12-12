@@ -84,8 +84,26 @@ class MovieRepository : KoinComponent {
         }
     }
 
-    suspend fun getSortBy(sort: SortByType): Result<CategoriesMoviesResponse>{
-        return when(val result = online.getSortBy(sort)){
+    suspend fun getSimilarMovies(movieId: Int,page: Int): Result<CategoriesMoviesResponse>{
+        return when(val result = online.getSimilarMovies(movieId, page)){
+            is Result.Succes -> {
+                Result.Succes(result.data)
+            }
+            is Result.Error -> result
+        }
+    }
+
+    suspend fun getSortBy(sort: SortByType, page: Int): Result<CategoriesMoviesResponse>{
+        return when(val result = online.getSortBy(sort, page)){
+            is Result.Succes -> {
+                Result.Succes(result.data)
+            }
+            is Result.Error -> result
+        }
+    }
+
+    suspend fun getReviewsOfMovie(movieId: Int, page:Int): Result<ReviewsMovieResponse>{
+        return when(val result = online.getReviewsOfMovie(movieId,page)){
             is Result.Succes -> {
                 Result.Succes(result.data)
             }
