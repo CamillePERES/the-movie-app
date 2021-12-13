@@ -1,7 +1,6 @@
 package com.gmail.eamosse.imdb.ui.reviews
 
 import androidx.lifecycle.*
-import com.gmail.eamosse.idbdata.api.response.DiscoverMovie
 import com.gmail.eamosse.idbdata.api.response.ReviewsResponse
 import com.gmail.eamosse.idbdata.repository.MovieRepository
 import com.gmail.eamosse.idbdata.utils.Result
@@ -49,6 +48,7 @@ class ReviewsViewModel(private val repository: MovieRepository): ViewModel() {
     }
 
     fun getMoreReviews() {
-        TODO("Not yet implemented")
+       page++
+       getReviews()
     }
 }

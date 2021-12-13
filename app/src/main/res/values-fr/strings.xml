@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mon Application</string>
+    <string name="next">Suivant</string>
+    <string name="previous">Precedent</string>
+    <string name="hello_home_second">Hello HomeSecondFragment. Arg: %1$s</string>
+    <string name="hello_dashboard_second">Hello DashboardSecondFragment. Arg: %1$s</string>
+    <string name="hello_notifications_second">Hello NotificationsSecondFragment. Arg: %1$s</string>
+    <string name="title_home">Menu</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_release">Dernieres sorties</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="movie_details">Details du film</string>
+    <string name="similar_movie">Films similaires</string>
+    <string name="about">Profil</string>
+    <string name="review">Avis</string>
+    <string name="ytb">Lecteur video</string>
+
+    <string name="home_second">Home Second</string>
+    <string name="videos">Videos</string>
+    <string name="cast">Distribution</string>
+    <string name="similar">Fans aiment aussi</string>
+    <string name="see_more">Voir plus</string>
+</resources>

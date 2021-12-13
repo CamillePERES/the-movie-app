@@ -7,7 +7,7 @@ import com.gmail.eamosse.idbdata.api.response.VideosResponse
 import com.gmail.eamosse.imdb.databinding.VideoItemBinding
 import com.gmail.eamosse.imdb.ui.extension.bindVideoPoster
 
-class VideosAdapter(private val items:List<VideosResponse>): RecyclerView.Adapter<VideosAdapter.ViewHolder>() {
+class VideosAdapter(private val items:List<VideosResponse>, private val listener:IVideosListener): RecyclerView.Adapter<VideosAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideosAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -20,6 +20,10 @@ class VideosAdapter(private val items:List<VideosResponse>): RecyclerView.Adapte
 
         val context = holder.binding.image.context
         video.key?.let { holder.binding.image.bindVideoPoster(it, context) }
+
+        holder.binding.root.setOnClickListener {
+            listener.onClickVideo(video)
+        }
     }
 
     override fun getItemCount(): Int = items.size

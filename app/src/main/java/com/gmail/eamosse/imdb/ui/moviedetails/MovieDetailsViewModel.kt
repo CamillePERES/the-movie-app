@@ -1,9 +1,6 @@
 package com.gmail.eamosse.imdb.ui.moviedetails
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.gmail.eamosse.idbdata.api.response.CastResponse
 import com.gmail.eamosse.idbdata.api.response.DiscoverMovie
 import com.gmail.eamosse.idbdata.api.response.MovieResponse
@@ -18,6 +15,7 @@ class MovieDetailsViewModel(private val repository: MovieRepository): ViewModel(
 
     var movieSelected: MovieParcelable? = null
     var page: Int = 1
+    val similarMovies = MediatorLiveData<MutableList<DiscoverMovie>>()
 
     private val _moviesDetails: MutableLiveData<MovieResponse> = MutableLiveData()
     val details: LiveData<MovieResponse>
@@ -36,8 +34,20 @@ class MovieDetailsViewModel(private val repository: MovieRepository): ViewModel(
         get() = _videos
 
     private val _similarMovies: MutableLiveData<List<DiscoverMovie>> = MutableLiveData()
-    val similarMovies: LiveData<List<DiscoverMovie>>
-        get() = _similarMovies
+    /*val similarMovies: LiveData<List<DiscoverMovie>>
+        get() = _similarMovies*/
+
+    init{
+        similarMovies.addSource(_similarMovies){
+            similarMovies.appendList(it)
+        }
+    }
+
+    fun <T, X : List<T>> MutableLiveData<MutableList<T>>.appendList(list: X) {
+        val newList = this.value ?: mutableListOf()
+        newList.addAll(list)
+        this.value = newList
+    }
 
     fun getMovie(){
         movieSelected?.let {

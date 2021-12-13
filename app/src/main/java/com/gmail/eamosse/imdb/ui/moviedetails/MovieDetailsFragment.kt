@@ -8,13 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.gmail.eamosse.idbdata.api.response.VideosResponse
 import com.gmail.eamosse.imdb.databinding.FragmentDetailsMoviesBinding
+import com.gmail.eamosse.imdb.parcelable.VideoParcelable
 import com.gmail.eamosse.imdb.ui.ScrollListener
 import com.gmail.eamosse.imdb.ui.extension.*
 import com.gmail.eamosse.imdb.ui.similarmovie.SimilarMovieAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MovieDetailsFragment(): Fragment() {
+class MovieDetailsFragment(): Fragment(), IVideosListener {
 
     private val viewModel: MovieDetailsViewModel by viewModel()
     private lateinit var binding: FragmentDetailsMoviesBinding
@@ -31,7 +33,7 @@ class MovieDetailsFragment(): Fragment() {
         binding.viewmodel = viewModel
         viewModel.movieSelected = args.details
         binding.castList.adapter = CastAdapter(listOf())
-        binding.videosList.adapter = VideosAdapter(listOf())
+        binding.videosList.adapter = VideosAdapter(listOf(), this)
         similarMovieAdapter = SimilarMovieAdapter(ScrollListener(binding.partialSimilarMovieList){
             viewModel.getSimilarMovies()
         })
@@ -59,11 +61,6 @@ class MovieDetailsFragment(): Fragment() {
                 val action = MovieDetailsFragmentDirections.actionMovieDetailsFragmentToReviewsFragment(args.details)
                 Navigation.findNavController(binding.root).navigate(action)
             }
-
-            binding.videosList.setOnClickListener{
-
-            }
-
         })
 
         viewModel.cast.observe(viewLifecycleOwner) {
@@ -71,7 +68,7 @@ class MovieDetailsFragment(): Fragment() {
         }
 
         viewModel.videos.observe(viewLifecycleOwner) {
-            binding.videosList.adapter = VideosAdapter(it)
+            binding.videosList.adapter = VideosAdapter(it, this)
         }
 
         viewModel.similarMovies.observe(viewLifecycleOwner){
@@ -82,6 +79,13 @@ class MovieDetailsFragment(): Fragment() {
         viewModel.getCredits()
         viewModel.getVideos()
         viewModel.getSimilarMovies()
+    }
+
+    override fun onClickVideo(video: VideosResponse) {
+        video.key?.let{
+            val action = MovieDetailsFragmentDirections.actionMovieDetailsFragmentToYoutubeFragment(VideoParcelable(it) )
+            Navigation.findNavController(binding.root).navigate(action)
+        }
     }
 
 }

@@ -12,7 +12,7 @@ import com.gmail.eamosse.imdb.R
 
 class NotificationsFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    /*private lateinit var notificationsViewModel: NotificationsViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -27,5 +27,5 @@ class NotificationsFragment : Fragment() {
             textView.text = it
         })
         return root
-    }
+    }*/
 }

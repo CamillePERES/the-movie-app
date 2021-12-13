@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.gmail.eamosse.idbdata.api.response.DiscoverMovie
 import com.gmail.eamosse.idbdata.api.response.ReviewsResponse
 import com.gmail.eamosse.imdb.databinding.ReviewsItemBinding
 import com.gmail.eamosse.imdb.ui.ScrollListener
@@ -49,12 +48,12 @@ class ReviewsAdapter(private val infiniteContentScrollListener: ScrollListener):
         }
     }
 
-    private class DiffCallback : DiffUtil.ItemCallback<DiscoverMovie>() {
-        override fun areItemsTheSame(oldItem: DiscoverMovie, newItem: DiscoverMovie): Boolean {
+    private class DiffCallback : DiffUtil.ItemCallback<ReviewsResponse>() {
+        override fun areItemsTheSame(oldItem: ReviewsResponse, newItem: ReviewsResponse): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: DiscoverMovie, newItem: DiscoverMovie): Boolean {
+        override fun areContentsTheSame(oldItem: ReviewsResponse, newItem: ReviewsResponse): Boolean {
             return oldItem.id == newItem.id
         }
     }

@@ -45,6 +45,10 @@
             android:id="@+id/action_MovieDetailsFragment_to_ReviewsFragment"
             app:destination="@id/navigation_review" />
 
+        <action
+            android:id="@+id/action_MovieDetailsFragment_to_YoutubeFragment"
+            app:destination="@id/navigation_ytb"/>
+
         <argument
             android:name="Details"
             app:argType="com.gmail.eamosse.imdb.parcelable.MovieParcelable" />
@@ -101,6 +105,16 @@
         <argument
             android:name="Review"
             app:argType="com.gmail.eamosse.imdb.parcelable.MovieParcelable" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_ytb"
+        android:name="com.gmail.eamosse.imdb.ui.youtube.YoutubeFragment"
+        android:label="@string/ytb"
+        tools:layout="@layout/fragment_ytb">
+        <argument
+            android:name="Video"
+            app:argType="com.gmail.eamosse.imdb.parcelable.VideoParcelable" />
     </fragment>
 
 </navigation>
