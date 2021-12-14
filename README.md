@@ -23,45 +23,63 @@ Le mini-projet permet de consulter les films selon une catégorie sélectionnée
 
 ## Contenu des fragments
 - Fragment About:
-  Consultation du profil
-  ![about](/assets/imgs/AboutView.png)
+  - Consultation du profil
+  
+![about](/assets/imgs/AboutView.png)
+
 
 - Fragment Category:
-  Visualisation des catégories de films
-  ![category](/assets/imgs/CategoryView.png)
+  - Visualisation des catégories de films
+  
+![category](/assets/imgs/CategoryView.png)
+
 
 - Fragment DetailsMovie:
-  Détails du film : titre, cast, trailers, description, durée du film, langue, mettre en favoris, films similaires
-  ![details](/assets/imgs/DetailsMovieView.png)
+  - Détails du film : titre, cast, trailers, description, durée du film, langue, mettre en favoris, films similaires
+  
+![details](/assets/imgs/DetailsMovieView.png)
+
 
 - Fragment FavoriteMovie:
-  Visualisation du film mis en favoris
-  ![favorite](/assets/imgs/FavoriteView.png)
+  - Visualisation du film mis en favoris
+  
+![favorite](/assets/imgs/FavoriteView.png)
 
 - Fragment LastRelease:
-  Visualisation des dernières sorties triées par poupularité
-  ![release](/assets/imgs/LastReleaseView.png)
+  - Visualisation des dernières sorties triées par poupularité
+  
+![release](/assets/imgs/LastReleaseView.png)
+
 
 - Fragment Movie:
-  Visualisation des films
-  ![movie](/assets/imgs/MovieViews.png)
+  - Visualisation des films
+  
+![movie](/assets/imgs/MovieViews.png)
+
 
 - Fragment Reviews:
-  Visualisation des reviews attribuées au film
-  ![review](/assets/imgs/ReviewsView.png)
+  - Visualisation des reviews attribuées au film
+  
+![review](/assets/imgs/ReviewsView.png)
+
 
 - Fragment SimilarMovie:
-  Visualisation des films similaires au film sélectionné
-  ![similar](/assets/imgs/SimilarMovieView.png)
+  - Visualisation des films similaires au film sélectionné
+  
+![similar](/assets/imgs/SimilarMovieView.png)
+
 
 - Fragment Ytb:
-  Visualisation des vidéos
-  ![videos](/assets/imgs/YtVieww.png)
+  - Visualisation des vidéos
+  
+![videos](/assets/imgs/YtVieww.png)
   
 
 ## Traduction
   - Anglais
   - Français
+
+## Scroll Infini
 
 ## Librairies
 - Navigation-fragment
