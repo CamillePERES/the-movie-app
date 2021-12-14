@@ -5,11 +5,13 @@ import com.gmail.eamosse.idbdata.api.response.CastResponse
 import com.gmail.eamosse.idbdata.api.response.DiscoverMovie
 import com.gmail.eamosse.idbdata.api.response.MovieResponse
 import com.gmail.eamosse.idbdata.api.response.VideosResponse
+import com.gmail.eamosse.idbdata.local.entities.FavoriteMovieEntity
 import com.gmail.eamosse.idbdata.repository.MovieRepository
 import com.gmail.eamosse.idbdata.utils.Result
 import com.gmail.eamosse.imdb.parcelable.MovieParcelable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MovieDetailsViewModel(private val repository: MovieRepository): ViewModel() {
 
@@ -36,6 +38,10 @@ class MovieDetailsViewModel(private val repository: MovieRepository): ViewModel(
     private val _similarMovies: MutableLiveData<List<DiscoverMovie>> = MutableLiveData()
     /*val similarMovies: LiveData<List<DiscoverMovie>>
         get() = _similarMovies*/
+
+    private val _favorite: MutableLiveData<FavoriteMovieEntity?> = MutableLiveData()
+    val favorite: LiveData<FavoriteMovieEntity?>
+        get() = _favorite
 
     init{
         similarMovies.addSource(_similarMovies){
@@ -109,6 +115,36 @@ class MovieDetailsViewModel(private val repository: MovieRepository): ViewModel(
                 }
             }
         }
+    }
+
+    fun getFavoriteMovieById(){
+        movieSelected?.let{
+            viewModelScope.launch(Dispatchers.IO){
+                _favorite.postValue(repository.getById(it.id))
+            }
+        }
+    }
+
+    suspend fun actionFavoriteMovie() {
+        withContext(Dispatchers.IO){
+            val favorite = _favorite.value
+            if(favorite != null){
+                val favoriteMovie = _favorite.value
+                favoriteMovie?.let{
+                    repository.deleteFavoriteMovie(it.id)
+                    getFavoriteMovieById()
+                }
+            }
+            else{
+                val movie = _moviesDetails.value
+                movie?.let{
+                    repository.insertFavoriteMovie(FavoriteMovieEntity(it.id, it.title, it.posterPath))
+                    getFavoriteMovieById()
+                }
+
+            }
+        }
+
     }
 
 }

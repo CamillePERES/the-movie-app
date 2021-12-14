@@ -130,6 +130,18 @@
                             app:layout_constraintTop_toTopOf="@id/ratingBar"
                             tools:text="189 votes" />
 
+                        <ImageButton
+                            android:id="@+id/favorite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:background="@null"
+                            app:layout_constraintBottom_toBottomOf="@+id/numOfVotes"
+                            app:layout_constraintStart_toEndOf="@+id/numOfVotes"
+                            app:layout_constraintTop_toTopOf="@id/numOfVotes"
+                            app:srcCompat="@drawable/ic_baseline_favorite_border_24"
+                            tools:text="189 votes" />
+
                         <LinearLayout
                             android:id="@+id/subInfoLayout"
                             android:layout_width="wrap_content"

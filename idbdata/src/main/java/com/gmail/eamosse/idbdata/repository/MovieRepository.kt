@@ -7,6 +7,7 @@ import com.gmail.eamosse.idbdata.api.service.SortByType
 import com.gmail.eamosse.idbdata.data.*
 import com.gmail.eamosse.idbdata.datasources.LocalDataSource
 import com.gmail.eamosse.idbdata.datasources.OnlineDataSource
+import com.gmail.eamosse.idbdata.local.entities.FavoriteMovieEntity
 import com.gmail.eamosse.idbdata.utils.Result
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -109,5 +110,21 @@ class MovieRepository : KoinComponent {
             }
             is Result.Error -> result
         }
+    }
+
+    fun insertFavoriteMovie(favoriteMovieEntity: FavoriteMovieEntity){
+        local.insertFavoriteMovie(favoriteMovieEntity)
+    }
+
+    fun getFavoriteMovie(): List<FavoriteMovieEntity>{
+        return local.getFavoriteMovie()
+    }
+
+    fun getById(id:Int): FavoriteMovieEntity? {
+        return local.getById(id)
+    }
+
+    fun deleteFavoriteMovie(id: Int){
+        local.deleteFavoriteMovie(id)
     }
 }

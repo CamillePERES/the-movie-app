@@ -15,7 +15,7 @@ class SimilarMovieAdapter(
     private val infiniteContentScrollListener: ScrollListener
 ) : ListAdapter<(DiscoverMovie), SimilarMovieAdapter.ViewHolder>(DiffCallback())  {
 
-    private val limit = 4
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimilarMovieAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -43,14 +43,6 @@ class SimilarMovieAdapter(
             binding.item = item
         }
     }
-
-    /*override fun getItemCount(): Int {
-        return if(items.size > limit){
-            limit;
-        } else {
-            items.size;
-        }
-    }*/
 
     private class DiffCallback : DiffUtil.ItemCallback<DiscoverMovie>() {
         override fun areItemsTheSame(oldItem: DiscoverMovie, newItem: DiscoverMovie): Boolean {

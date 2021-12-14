@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.gmail.eamosse.idbdata.api.response.VideosResponse
+import com.gmail.eamosse.imdb.R
 import com.gmail.eamosse.imdb.databinding.FragmentDetailsMoviesBinding
 import com.gmail.eamosse.imdb.parcelable.VideoParcelable
-import com.gmail.eamosse.imdb.ui.ScrollListener
 import com.gmail.eamosse.imdb.ui.extension.*
-import com.gmail.eamosse.imdb.ui.similarmovie.SimilarMovieAdapter
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailsFragment(): Fragment(), IVideosListener {
@@ -21,7 +22,6 @@ class MovieDetailsFragment(): Fragment(), IVideosListener {
     private val viewModel: MovieDetailsViewModel by viewModel()
     private lateinit var binding: FragmentDetailsMoviesBinding
     private val args by navArgs<MovieDetailsFragmentArgs>()
-    private lateinit var similarMovieAdapter: SimilarMovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,9 +34,7 @@ class MovieDetailsFragment(): Fragment(), IVideosListener {
         viewModel.movieSelected = args.details
         binding.castList.adapter = CastAdapter(listOf())
         binding.videosList.adapter = VideosAdapter(listOf(), this)
-        similarMovieAdapter = SimilarMovieAdapter(ScrollListener(binding.partialSimilarMovieList){
-            viewModel.getSimilarMovies()
-        })
+        binding.partialSimilarMovieList.adapter = DetailsSimilarMoviesAdapter(listOf())
         return binding.root
     }
 
@@ -61,6 +59,12 @@ class MovieDetailsFragment(): Fragment(), IVideosListener {
                 val action = MovieDetailsFragmentDirections.actionMovieDetailsFragmentToReviewsFragment(args.details)
                 Navigation.findNavController(binding.root).navigate(action)
             }
+
+            binding.favorite.setOnClickListener{
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.actionFavoriteMovie()
+                }
+            }
         })
 
         viewModel.cast.observe(viewLifecycleOwner) {
@@ -72,13 +76,24 @@ class MovieDetailsFragment(): Fragment(), IVideosListener {
         }
 
         viewModel.similarMovies.observe(viewLifecycleOwner){
-            similarMovieAdapter.submitList(it)
+            binding.partialSimilarMovieList.adapter = DetailsSimilarMoviesAdapter(it)
+        }
+
+        viewModel.favorite.observe(viewLifecycleOwner){
+            if(it != null){
+
+                binding.favorite.setImageResource(R.drawable.ic_baseline_favorite_24)
+            }
+            else{
+                binding.favorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            }
         }
 
         viewModel.getMovie()
         viewModel.getCredits()
         viewModel.getVideos()
         viewModel.getSimilarMovies()
+        viewModel.getFavoriteMovieById()
     }
 
     override fun onClickVideo(video: VideosResponse) {

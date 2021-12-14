@@ -12,8 +12,14 @@
         android:title="@string/title_release" />
 
     <item
+        android:id="@+id/navigation_favorite"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="@string/favorite" />
+
+    <item
         android:id="@+id/navigation_about"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/about"/>
+
 
 </menu>

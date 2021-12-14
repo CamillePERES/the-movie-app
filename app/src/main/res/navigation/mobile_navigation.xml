@@ -60,6 +60,7 @@
         android:name="com.gmail.eamosse.imdb.ui.home.HomeSecondFragment"
         android:label="@string/home_second"
         tools:layout="@layout/fragment_home_second">
+
         <action
             android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
             app:destination="@id/navigation_home" />
@@ -92,6 +93,7 @@
         android:name="com.gmail.eamosse.imdb.ui.similarmovie.SimilarMovieFragment"
         android:label="@string/similar"
         tools:layout="@layout/fragment_similar_movies">
+
         <argument
             android:name="Similar"
             app:argType="com.gmail.eamosse.imdb.parcelable.MovieParcelable" />
@@ -112,9 +114,22 @@
         android:name="com.gmail.eamosse.imdb.ui.youtube.YoutubeFragment"
         android:label="@string/ytb"
         tools:layout="@layout/fragment_ytb">
+
         <argument
             android:name="Video"
             app:argType="com.gmail.eamosse.imdb.parcelable.VideoParcelable" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_favorite"
+        android:name="com.gmail.eamosse.imdb.ui.favorite.FavoriteMovieFragment"
+        android:label="@string/favorite"
+        tools:layout="@layout/fragment_favorite">
+
+        <action
+            android:id="@+id/action_FavoriteMovieFragment_to_MovieDetailsFragment"
+            app:destination="@id/navigation_movies_details"/>
+
     </fragment>
 
 </navigation>

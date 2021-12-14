@@ -1,6 +1,7 @@
 package com.gmail.eamosse.imdb.di
 
 import android.content.Context
+import com.gmail.eamosse.imdb.ui.favorite.FavoriteMovieViewModel
 import com.gmail.eamosse.imdb.ui.home.HomeViewModel
 import com.gmail.eamosse.imdb.ui.movie.MovieViewModel
 import com.gmail.eamosse.imdb.ui.moviedetails.MovieDetailsViewModel
@@ -49,5 +50,9 @@ val appModule = module {
 
     viewModel {
         ReviewsViewModel(repository = get())
+    }
+
+    viewModel {
+        FavoriteMovieViewModel(repository = get())
     }
 }
