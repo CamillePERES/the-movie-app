@@ -1,53 +1,76 @@
-# The Moovie App
+# MiniProjet - The Moovie App
 
-## Objectifs fonctionnels  
-Dans ce projet, nous allons créer l'application AnneFlix (The new Netflix). L'objectif est d'exploiter la base de données TheMoovieDB (https://developers.themoviedb.org/3) afin de permettre aux utilisateurs de l'application de visualiser, noter et voir la bande annonce des films de la base de données. 
+## Liste des membres
+Camille PERES
 
-## Objectifs techniques 
-Techniquement, ce projet devrait nous permettre d'expérimenter de manière plus approfondie les notions vues en cours: 
-- Kotlin
-- Architecture Components 
-- Data Binding
-- Retrofit 
-- Room 
-- .... 
+## Fonctionnalités:
+Le mini-projet permet de consulter les films selon une catégorie sélectionnée. Dans la vue du détail du films, il est possible de voir le cast, les trailers, les visualiser, de voir les films similaires et de mettre les films en favoris. De ce fait, une page de consultation des favoris est disponible. Enfin, il est possible de voir les dernières sorties de films. D'autre part, il est également possible de consulter les avis laissés sur un film.
 
-## Quelques librairies à utiliser 
-- Navigation-fragment 
-- Hilt : Injection de dépendances 
-- Gson/Moshi : Sérialisation et Désérialisation JSON 
+- 9 fragments:
+  - Fragment de catégorie: affiche les différentes catégories de films
+  - Fragment de films : affiche les films relatifs à la catégorie sélectionnée
+  - Fragment de détails de films : affiche les détails du film, le casting, les films similaires, les trailers, mise en favoris, les reviews
+  - Fragment de films similaires: affiche les films similaires au film sélectionné
+  - Fragment de visualisation de vidéo: permet de visualiser la vidéo une fois cliquée dessus
+  - Fragment des votes: affiche les reviews faites sur les films
+  - Fragment des dernières sorties: affiche les films dernièrement sortis et classés par popularité
+  - Fragment de favoris : affiche les films mis en favoris à partir du détail du film
+  - Fragment à propos : explique le projet
+
+## Navigation:
+
+![navigation](/assets/imgs/NavigationView.png)
+
+## Contenu des fragments
+- Fragment About:
+  Consultation du profil
+  ![about](/assets/imgs/AboutView.png)
+
+- Fragment Category:
+  Visualisation des catégories de films
+  ![category](/assets/imgs/CategoryView.png)
+
+- Fragment DetailsMovie:
+  Détails du film : titre, cast, trailers, description, durée du film, langue, mettre en favoris, films similaires
+  ![details](/assets/imgs/DetailsMovieView.png)
+
+- Fragment FavoriteMovie:
+  Visualisation du film mis en favoris
+  ![favorite](/assets/imgs/FavoriteView.png)
+
+- Fragment LastRelease:
+  Visualisation des dernières sorties triées par poupularité
+  ![release](/assets/imgs/LastReleaseView.png)
+
+- Fragment Movie:
+  Visualisation des films
+  ![movie](/assets/imgs/MovieViews.png)
+
+- Fragment Reviews:
+  Visualisation des reviews attribuées au film
+  ![review](/assets/imgs/ReviewsView.png)
+
+- Fragment SimilarMovie:
+  Visualisation des films similaires au film sélectionné
+  ![similar](/assets/imgs/SimilarMovieView.png)
+
+- Fragment Ytb:
+  Visualisation des vidéos
+  ![videos](/assets/imgs/YtVieww.png)
+  
+
+## Traduction
+  - Anglais
+  - Français
+
+## Librairies
+- Navigation-fragment
+- Hilt : Injection de dépendances
+- Gson : Sérialisation et Désérialisation JSON
 - Retrofit: Pour consommer l'API The Moovie DB
-- Picasso/Glide/Coil/ : Pour afficher les images 
+- Glide : Pour afficher les images
 - OkHttp: Client HTTP
-
-## Critères d'acceptance
-- Une seule activité
-- Au moins 5 vues différentes (fragments) + un fragment About qui présente le projet et les membres du groupe
-- Gestion de données via une API et Room
-- Gestion de la navigation avec Navigation-fragment
-- Tests unitaires (Datasource et Repository)
-- Au moins 2 tests instrumentaires par vues
-
-
-## Différentes étapes 
-1. Fork le repository.  
-
-2. Afficher les catégories de films. Les étapes sont décrites [ici](https://github.com/eamosse/the-movie-app/blob/master/home_tuto.md)
-
-3. Afficher les films d'une catégorie. Les consignes sont par [ici](https://github.com/eamosse/the-movie-app/blob/master/movie_list.md)
-
-## Organisation
-- Groupes de 3 à 4 personnes
-- Commits, branches, et pull requests (il n'y aura pas de notes de groupe, le travail de chacun sera évalué principalement sur les commits) 
-
-## Rendu
-- Date limite : 30 Novembre 2021 (avant minuit) 
-- Modalités de rendu : Remplir le drive qui vous sera envoyé par mail
-- Ajouté un fichier readme dans lequel vous décrirez 
-    - Le contexte du projet et ses différentes fonctionnalités
-    - La liste des membres du groupe
-    - Captures d'écrans des principales vues 
-    - Vidéos de démonstration de l'application 
+- AndroidYtbPlayer: Pour lire les vidéos
 
 
 
